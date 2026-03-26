@@ -14,6 +14,12 @@ import TemplateDetailPage from './pages/TemplateDetailPage'
 import ComparePage from './pages/ComparePage'
 import SearchPage from './pages/SearchPage'
 import AboutPage from './pages/AboutPage'
+import ScorecardsPage from './pages/ScorecardsPage'
+import DeadlinesPage from './pages/DeadlinesPage'
+import FeesPage from './pages/FeesPage'
+import PenaltiesPage from './pages/PenaltiesPage'
+import CrosswalkPage from './pages/CrosswalkPage'
+import AppealPathwaysPage from './pages/AppealPathwaysPage'
 
 export default function App() {
   return (
@@ -31,6 +37,12 @@ export default function App() {
             <Route path="templates" element={<TemplatesPage />} />
             <Route path="templates/:id" element={<TemplateDetailPage />} />
             <Route path="compare" element={<ComparePage />} />
+            <Route path="scorecards" element={<ScorecardsPage />} />
+            <Route path="deadlines" element={<DeadlinesPage />} />
+            <Route path="fees" element={<FeesPage />} />
+            <Route path="penalties" element={<PenaltiesPage />} />
+            <Route path="crosswalk" element={<CrosswalkPage />} />
+            <Route path="appeals" element={<AppealPathwaysPage />} />
             <Route path="search" element={<SearchPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="*" element={<NotFound />} />

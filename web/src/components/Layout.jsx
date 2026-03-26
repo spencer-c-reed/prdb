@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useData } from '../data/DataContext'
 import SearchBar from './SearchBar'
@@ -15,6 +15,45 @@ function NavItem({ to, children }) {
     >
       {children}
     </NavLink>
+  )
+}
+
+function AnalysisDropdown() {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen(!open)}
+        className={`text-sm font-medium transition-colors ${
+          open ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'
+        } flex items-center gap-1`}
+      >
+        Analysis
+        <svg className={`w-3 h-3 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-50">
+          <NavLink to="/scorecards" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Scorecards</NavLink>
+          <NavLink to="/deadlines" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Deadline Rankings</NavLink>
+          <NavLink to="/fees" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Fee Comparison</NavLink>
+          <NavLink to="/penalties" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Penalties</NavLink>
+          <NavLink to="/crosswalk" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Exemption Crosswalk</NavLink>
+          <NavLink to="/appeals" onClick={() => setOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Appeal Pathways</NavLink>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -45,6 +84,7 @@ export default function Layout() {
               <NavItem to="/agencies">Agencies</NavItem>
               <NavItem to="/templates">Templates</NavItem>
               <NavItem to="/compare">Compare</NavItem>
+              <AnalysisDropdown />
             </div>
 
             {/* Mobile hamburger */}
@@ -79,6 +119,17 @@ export default function Layout() {
             <NavItem to="/agencies">Agencies</NavItem>
             <NavItem to="/templates">Templates</NavItem>
             <NavItem to="/compare">Compare</NavItem>
+            <div className="border-t border-gray-100 pt-2 mt-1">
+              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Analysis</div>
+              <div className="flex flex-col gap-2 pl-2">
+                <NavItem to="/scorecards">Scorecards</NavItem>
+                <NavItem to="/deadlines">Deadline Rankings</NavItem>
+                <NavItem to="/fees">Fee Comparison</NavItem>
+                <NavItem to="/penalties">Penalties</NavItem>
+                <NavItem to="/crosswalk">Exemption Crosswalk</NavItem>
+                <NavItem to="/appeals">Appeal Pathways</NavItem>
+              </div>
+            </div>
           </div>
         )}
       </nav>

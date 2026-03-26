@@ -22,6 +22,12 @@ export function DataProvider({ children }) {
     jurisdictions: [],
     documents: [],
     stats: {},
+    scorecards: [],
+    deadlineRankings: [],
+    feeComparison: [],
+    penaltyComparison: [],
+    exemptionCrosswalk: [],
+    appealPathways: [],
     searchIndex: null,
   })
 
@@ -37,6 +43,12 @@ export function DataProvider({ children }) {
           documents,
           stats,
           searchIndexData,
+          scorecards,
+          deadlineRankings,
+          feeComparison,
+          penaltyComparison,
+          exemptionCrosswalk,
+          appealPathways,
         ] = await Promise.all([
           fetchJSON('exemptions.json'),
           fetchJSON('rules.json'),
@@ -46,6 +58,12 @@ export function DataProvider({ children }) {
           fetchJSON('documents.json'),
           fetchJSON('stats.json'),
           fetchJSON('search-index.json'),
+          fetchJSON('scorecards.json'),
+          fetchJSON('deadline_rankings.json'),
+          fetchJSON('fee_comparison.json'),
+          fetchJSON('penalty_comparison.json'),
+          fetchJSON('exemption_crosswalk.json'),
+          fetchJSON('appeal_pathways.json'),
         ])
 
         let searchIndex = null
@@ -73,6 +91,12 @@ export function DataProvider({ children }) {
           jurisdictions: jurisdictions || [],
           documents: documents || [],
           stats: stats || {},
+          scorecards: scorecards || [],
+          deadlineRankings: deadlineRankings || [],
+          feeComparison: feeComparison || [],
+          penaltyComparison: penaltyComparison || [],
+          exemptionCrosswalk: exemptionCrosswalk || [],
+          appealPathways: appealPathways || [],
           searchIndex,
         })
       } catch (err) {
