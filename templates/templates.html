@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Request Templates — PRDB{% endblock %}
+
+{% block content %}
+<h1>Request Templates</h1>
+<p class="muted">Model request language for public records requests by jurisdiction and record type.</p>
+
+<div style="margin: 1rem 0;">
+    <a href="/templates" {% if not selected_jurisdiction %}style="font-weight: bold;"{% endif %}>All</a>
+    {% for j in jurisdictions %}
+    | <a href="/templates?jurisdiction={{ j }}" {% if selected_jurisdiction == j %}style="font-weight: bold;"{% endif %}>{{ j }}</a>
+    {% endfor %}
+</div>
+
+{% for t in templates %}
+<div class="card">
+    <div>
+        <span class="badge">{{ t.jurisdiction }}</span>
+        {% if t.record_type %}<span class="badge" style="background: #f0fdf4; color: #16a34a;">{{ t.record_type }}</span>{% endif %}
+    </div>
+    <h3 style="margin: 0.5rem 0; font-size: 1rem;">{{ t.template_name }}</h3>
+    <pre style="white-space: pre-wrap; font-size: 0.85rem; background: var(--code-bg); padding: 1rem; border-radius: 4px; margin-top: 0.5rem;">{{ t.template_text }}</pre>
+    {% if t.fee_waiver_language %}
+    <details style="margin-top: 0.5rem;">
+        <summary style="cursor: pointer; font-size: 0.85rem; color: var(--accent);">Fee Waiver Language</summary>
+        <pre style="white-space: pre-wrap; font-size: 0.85rem; background: var(--code-bg); padding: 1rem; border-radius: 4px; margin-top: 0.5rem;">{{ t.fee_waiver_language }}</pre>
+    </details>
+    {% endif %}
+    {% if t.expedited_language %}
+    <details style="margin-top: 0.5rem;">
+        <summary style="cursor: pointer; font-size: 0.85rem; color: var(--accent);">Expedited Processing Language</summary>
+        <pre style="white-space: pre-wrap; font-size: 0.85rem; background: var(--code-bg); padding: 1rem; border-radius: 4px; margin-top: 0.5rem;">{{ t.expedited_language }}</pre>
+    </details>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% if not templates %}
+<p>No templates found{% if selected_jurisdiction %} for {{ selected_jurisdiction }}{% endif %}.</p>
+{% endif %}
+{% endblock %}

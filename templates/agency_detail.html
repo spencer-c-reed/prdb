@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}{{ agency.name }} — PRDB{% endblock %}
+
+{% block content %}
+<div>
+    <span class="badge">{{ agency.jurisdiction }}</span>
+    <span class="badge">{{ agency.level }}</span>
+</div>
+
+<h1 style="margin-top: 0.5rem;">{{ agency.name }}</h1>
+{% if agency.abbreviation %}<p class="muted">{{ agency.abbreviation }}</p>{% endif %}
+
+<div class="card">
+    <h2 style="font-size: 1rem;">Contact Information</h2>
+    <table>
+        {% if agency.foia_officer_name %}
+        <tr><td><strong>FOIA Officer</strong></td><td>{{ agency.foia_officer_name }}{% if agency.foia_officer_title %} ({{ agency.foia_officer_title }}){% endif %}</td></tr>
+        {% endif %}
+        {% if agency.email %}
+        <tr><td><strong>Email</strong></td><td><a href="mailto:{{ agency.email }}">{{ agency.email }}</a></td></tr>
+        {% endif %}
+        {% if agency.phone %}
+        <tr><td><strong>Phone</strong></td><td>{{ agency.phone }}</td></tr>
+        {% endif %}
+        {% if agency.mailing_address %}
+        <tr><td><strong>Address</strong></td><td>{{ agency.mailing_address }}</td></tr>
+        {% endif %}
+        {% if agency.portal_url %}
+        <tr><td><strong>Portal</strong></td><td><a href="{{ agency.portal_url }}" target="_blank">{{ agency.portal_url }}</a></td></tr>
+        {% endif %}
+        {% if agency.submission_method %}
+        <tr><td><strong>Submission</strong></td><td>{{ agency.submission_method }}</td></tr>
+        {% endif %}
+        {% if agency.required_form_url %}
+        <tr><td><strong>Required Form</strong></td><td><a href="{{ agency.required_form_url }}" target="_blank">Download Form</a></td></tr>
+        {% endif %}
+    </table>
+</div>
+
+{% if agency.fee_schedule_parsed %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Fee Schedule</h2>
+    <table>
+        {% for key, value in agency.fee_schedule_parsed.items() %}
+        <tr><td>{{ key }}</td><td>${{ "%.2f"|format(value) }}</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+
+{% if agency.fee_waiver_criteria %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Fee Waiver</h2>
+    <p>{{ agency.fee_waiver_criteria }}</p>
+</div>
+{% endif %}
+
+{% if rules %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Response Rules ({{ agency.jurisdiction }})</h2>
+    <table>
+        <thead><tr><th>Rule</th><th>Parameter</th><th>Value</th><th>Day Type</th></tr></thead>
+        <tbody>
+        {% for r in rules %}
+            <tr>
+                <td>{{ r.rule_type }}</td>
+                <td>{{ r.param_key }}</td>
+                <td>{{ r.param_value }}</td>
+                <td>{{ r.day_type or '' }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% if agency.notes %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Notes</h2>
+    <p>{{ agency.notes }}</p>
+</div>
+{% endif %}
+
+{% if agency.last_verified %}
+<p class="muted" style="margin-top: 1rem;">Last verified: {{ agency.last_verified }}</p>
+{% endif %}
+{% endblock %}

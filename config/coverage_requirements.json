@@ -1,0 +1,24 @@
+{
+  "federal": {
+    "Federal FOIA Statute": {"min": 1, "description": "5 U.S.C. § 552 (FOIA)"},
+    "Federal FOIA Regulation": {"min": 10, "description": "28 CFR Part 16 + agency-specific"},
+    "OGIS Advisory Opinion": {"min": 50, "description": "OGIS advisory opinions"},
+    "DOJ OIP Guidance": {"min": 50, "description": "DOJ OIP guidance memos"},
+    "Federal Court Opinion": {"min": 500, "description": "FOIA case law from CourtListener"}
+  },
+  "NY": {
+    "State Public Records Statute": {"min": 1, "description": "FOIL - N.Y. Pub. Off. Law Art. 6"},
+    "AG Opinion - Public Records": {"min": 50, "description": "COOG advisory opinions + AG opinions"},
+    "State Court Opinion": {"min": 100, "description": "NY FOIL case law"}
+  },
+  "CA": {
+    "State Public Records Statute": {"min": 1, "description": "CPRA - Cal. Gov. Code §§ 7920-7931"},
+    "AG Opinion - Public Records": {"min": 30, "description": "CA AG opinions on public records"},
+    "State Court Opinion": {"min": 100, "description": "CA CPRA case law"}
+  },
+  "TX": {
+    "State Public Records Statute": {"min": 1, "description": "TPIA - Tex. Gov. Code Ch. 552"},
+    "AG Opinion - Public Records": {"min": 200, "description": "TX AG open records decisions"},
+    "State Court Opinion": {"min": 50, "description": "TX TPIA case law"}
+  }
+}

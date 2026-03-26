@@ -1,0 +1,64 @@
+{
+  "domains": {
+    "foia_federal": {
+      "word_signals": ["foia", "freedom", "information", "records", "ogis", "agency", "federal"],
+      "phrase_signals": ["freedom of information", "5 usc 552", "foia request", "agency records", "federal records", "public disclosure"],
+      "type_filters": ["Federal FOIA Statute", "Federal FOIA Regulation", "OGIS Advisory Opinion", "DOJ OIP Guidance", "Federal Court Opinion"]
+    },
+    "foia_exemptions": {
+      "word_signals": ["exemption", "exempt", "withhold", "redact", "redaction", "privilege"],
+      "phrase_signals": ["deliberative process", "law enforcement", "trade secret", "personal privacy", "national security", "attorney client", "work product", "inter-agency", "intra-agency"],
+      "type_filters": ["Federal Court Opinion", "OGIS Advisory Opinion", "AG Opinion - Public Records", "State Court Opinion"]
+    },
+    "foia_fees": {
+      "word_signals": ["fee", "waiver", "duplication", "search", "cost", "charge"],
+      "phrase_signals": ["fee waiver", "search fee", "duplication fee", "commercial use", "news media", "educational institution", "public interest"],
+      "type_filters": ["Federal FOIA Regulation", "Fee Schedule", "OGIS Advisory Opinion", "DOJ OIP Guidance"]
+    },
+    "foia_appeals": {
+      "word_signals": ["appeal", "denial", "adverse", "review", "overturn", "remand"],
+      "phrase_signals": ["adverse determination", "ogis mediation", "judicial review", "de novo", "vaughn index", "administrative appeal", "in camera"],
+      "type_filters": ["Federal Court Opinion", "State Court Opinion", "AG Opinion - Public Records", "DOJ OIP Guidance"]
+    },
+    "foia_expedited": {
+      "word_signals": ["expedited", "urgent", "compelling", "imminent"],
+      "phrase_signals": ["expedited processing", "compelling need", "imminent threat", "breaking news", "due process", "urgency to inform"],
+      "type_filters": ["Federal FOIA Regulation", "Federal Court Opinion", "DOJ OIP Guidance"]
+    },
+    "state_public_records": {
+      "word_signals": ["public", "records", "open", "sunshine", "foil", "disclosure"],
+      "phrase_signals": ["public records", "open records", "right to know", "public inspection", "government records", "state records"],
+      "type_filters": ["State Public Records Statute", "State Public Records Regulation", "AG Opinion - Public Records", "State Court Opinion"]
+    },
+    "open_meetings": {
+      "word_signals": ["meeting", "session", "executive", "closed", "notice", "agenda"],
+      "phrase_signals": ["open meetings", "sunshine act", "brown act", "public meeting", "executive session", "closed session", "meeting notice"],
+      "type_filters": ["Open Meetings Statute", "Open Meetings Regulation", "Open Meetings Opinion"]
+    },
+    "ag_rulings": {
+      "word_signals": ["attorney", "general", "ruling", "opinion", "advisory"],
+      "phrase_signals": ["attorney general", "ag opinion", "ag ruling", "ag decision", "open records decision", "open records ruling"],
+      "type_filters": ["AG Opinion - Public Records", "AG Guidance - Public Records"]
+    },
+    "police_records": {
+      "word_signals": ["police", "body", "camera", "force", "incident", "arrest", "booking"],
+      "phrase_signals": ["body camera", "body cam", "use of force", "police report", "incident report", "arrest record", "booking record", "dash cam"],
+      "type_filters": ["State Public Records Statute", "AG Opinion - Public Records", "State Court Opinion", "Federal Court Opinion"]
+    },
+    "government_contracts": {
+      "word_signals": ["contract", "procurement", "bid", "vendor", "purchase", "rfp"],
+      "phrase_signals": ["government contract", "sole source", "purchase order", "bid tabulation", "competitive bidding", "request for proposal"],
+      "type_filters": ["State Public Records Statute", "AG Opinion - Public Records", "State Court Opinion"]
+    },
+    "emails_communications": {
+      "word_signals": ["email", "text", "correspondence", "memo", "communication", "message"],
+      "phrase_signals": ["text message", "official email", "government email", "public correspondence", "official communication", "personal device"],
+      "type_filters": ["AG Opinion - Public Records", "State Court Opinion", "Federal Court Opinion", "DOJ OIP Guidance"]
+    },
+    "privacy_act": {
+      "word_signals": ["privacy", "personally", "identifiable", "pii", "individual"],
+      "phrase_signals": ["privacy act", "5 usc 552a", "system of records", "personally identifiable", "first party", "privacy impact"],
+      "type_filters": ["Privacy Act Statute", "Privacy Act Regulation", "Federal Court Opinion", "DOJ OIP Guidance"]
+    }
+  }
+}

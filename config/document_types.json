@@ -1,0 +1,48 @@
+{
+  "types": [
+    {"name": "Federal FOIA Statute", "authority": "highest", "source_phase": 1},
+    {"name": "Federal FOIA Regulation", "authority": "high", "source_phase": 1},
+    {"name": "State Public Records Statute", "authority": "highest", "source_phase": 2},
+    {"name": "State Public Records Regulation", "authority": "high", "source_phase": 2},
+    {"name": "AG Opinion - Public Records", "authority": "high", "source_phase": 2},
+    {"name": "AG Guidance - Public Records", "authority": "medium", "source_phase": 2},
+    {"name": "Supreme Court Opinion", "authority": "highest", "source_phase": 2},
+    {"name": "Federal Court Opinion", "authority": "high", "source_phase": 2},
+    {"name": "Circuit Court Opinion", "authority": "high", "source_phase": 2},
+    {"name": "District Court Opinion", "authority": "medium", "source_phase": 2},
+    {"name": "State Court Opinion", "authority": "high", "source_phase": 3},
+    {"name": "State Supreme Court Opinion", "authority": "high", "source_phase": 3},
+    {"name": "State Appellate Court Opinion", "authority": "medium", "source_phase": 3},
+    {"name": "OGIS Advisory Opinion", "authority": "medium", "source_phase": 1},
+    {"name": "DOJ OIP Guidance", "authority": "medium", "source_phase": 1},
+    {"name": "Agency FOIA Handbook", "authority": "reference", "source_phase": 3},
+    {"name": "Agency FOIA Report", "authority": "reference", "source_phase": 3},
+    {"name": "FOIA Annual Report", "authority": "reference", "source_phase": 3},
+    {"name": "Fee Schedule", "authority": "reference", "source_phase": 2},
+    {"name": "Request Template", "authority": "reference", "source_phase": 2},
+    {"name": "Practitioner Guide", "authority": "reference", "source_phase": 3},
+    {"name": "Legislative History", "authority": "reference", "source_phase": 4},
+    {"name": "Academic Analysis", "authority": "reference", "source_phase": 4},
+    {"name": "Open Meetings Statute", "authority": "highest", "source_phase": 3},
+    {"name": "Open Meetings Regulation", "authority": "high", "source_phase": 3},
+    {"name": "Open Meetings Opinion", "authority": "high", "source_phase": 4},
+    {"name": "Executive Order", "authority": "high", "source_phase": 2},
+    {"name": "Privacy Act Statute", "authority": "highest", "source_phase": 1},
+    {"name": "Privacy Act Regulation", "authority": "high", "source_phase": 1}
+  ],
+  "jurisdictions": [
+    "federal", "US",
+    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+    "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+    "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+    "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+    "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",
+    "DC", "PR", "GU", "VI", "AS", "MP"
+  ],
+  "authority_hierarchy": {
+    "highest": "Constitutions, statutes, SCOTUS opinions",
+    "high": "Regulations, circuit opinions, AG opinions",
+    "medium": "District opinions, advisory opinions, guidance",
+    "reference": "Reports, guides, templates, academic work"
+  }
+}

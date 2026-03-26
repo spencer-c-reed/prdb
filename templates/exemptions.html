@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Exemptions — PRDB{% endblock %}
+
+{% block content %}
+<h1>Exemption Catalog</h1>
+<p class="muted">Browse exemptions to public records disclosure by jurisdiction.</p>
+
+<div style="margin: 1rem 0;">
+    <a href="/exemptions" {% if not selected_jurisdiction %}style="font-weight: bold;"{% endif %}>All</a>
+    {% for j in jurisdictions %}
+    | <a href="/exemptions?jurisdiction={{ j }}" {% if selected_jurisdiction == j %}style="font-weight: bold;"{% endif %}>{{ j }}</a>
+    {% endfor %}
+</div>
+
+{% for e in exemptions %}
+<div class="card">
+    <div>
+        <span class="badge">{{ e.jurisdiction }}</span>
+        <span class="badge">{{ e.exemption_number or 'N/A' }}</span>
+        {% if e.category %}<span class="badge" style="background: #fef3c7; color: #d97706;">{{ e.category }}</span>{% endif %}
+    </div>
+    <h3 style="margin: 0.5rem 0; font-size: 1rem;">
+        <a href="/exemption/{{ e.id }}">{{ e.short_name or e.statute_citation }}</a>
+    </h3>
+    <p class="muted">{{ e.statute_citation }}</p>
+    {% if e.description %}<p style="margin-top: 0.5rem; font-size: 0.9rem;">{{ e.description[:200] }}{% if e.description|length > 200 %}...{% endif %}</p>{% endif %}
+</div>
+{% endfor %}
+
+{% if not exemptions %}
+<p>No exemptions found{% if selected_jurisdiction %} for {{ selected_jurisdiction }}{% endif %}.</p>
+{% endif %}
+{% endblock %}

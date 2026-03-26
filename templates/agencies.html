@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Agencies — PRDB{% endblock %}
+
+{% block content %}
+<h1>Agency Directory</h1>
+<p class="muted">FOIA/public records contact information by jurisdiction.</p>
+
+<div style="margin: 1rem 0;">
+    <a href="/agencies" {% if not selected_jurisdiction %}style="font-weight: bold;"{% endif %}>All</a>
+    {% for j in jurisdictions %}
+    | <a href="/agencies?jurisdiction={{ j }}" {% if selected_jurisdiction == j %}style="font-weight: bold;"{% endif %}>{{ j }}</a>
+    {% endfor %}
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Agency</th>
+            <th>Jurisdiction</th>
+            <th>Level</th>
+            <th>Submission</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for a in agencies %}
+        <tr>
+            <td><a href="/agency/{{ a.id }}">{{ a.name }}</a></td>
+            <td>{{ a.jurisdiction }}</td>
+            <td>{{ a.level }}</td>
+            <td>{{ a.submission_method or 'N/A' }}</td>
+            <td>
+                {% if a.portal_url %}<a href="{{ a.portal_url }}" target="_blank">Portal</a>{% endif %}
+                {% if a.email %}{{ a.email }}{% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if not agencies %}
+<p>No agencies found{% if selected_jurisdiction %} for {{ selected_jurisdiction }}{% endif %}.</p>
+{% endif %}
+{% endblock %}

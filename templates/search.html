@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Search — PRDB{% endblock %}
+
+{% block content %}
+<h1>Search</h1>
+
+<form action="/search" method="get" class="search-box">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search statutes, exemptions, case law...">
+    <button type="submit">Search</button>
+</form>
+
+{% if total > 0 %}
+<p class="muted">{{ total }} results{% if query %} for "{{ query }}"{% endif %}</p>
+
+<div style="display: flex; gap: 2rem; margin-top: 1rem;">
+    <!-- Facets sidebar -->
+    <div style="min-width: 200px;">
+        {% if facets.type %}
+        <h3 style="font-size: 0.9rem; margin-bottom: 0.5rem;">Document Type</h3>
+        <ul style="list-style: none; font-size: 0.85rem;">
+        {% for type_name, count in facets.type[:10] %}
+            <li style="margin-bottom: 0.3rem;">
+                <a href="/search?q={{ query|urlencode }}&type={{ type_name|urlencode }}">{{ type_name }}</a>
+                <span class="muted">({{ count }})</span>
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if facets.jurisdiction %}
+        <h3 style="font-size: 0.9rem; margin: 1rem 0 0.5rem;">Jurisdiction</h3>
+        <ul style="list-style: none; font-size: 0.85rem;">
+        {% for jur, count in facets.jurisdiction[:10] %}
+            <li style="margin-bottom: 0.3rem;">
+                <a href="/search?q={{ query|urlencode }}&jurisdiction={{ jur|urlencode }}">{{ jur }}</a>
+                <span class="muted">({{ count }})</span>
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <!-- Results -->
+    <div style="flex: 1;">
+    {% for doc in results %}
+        <div class="card">
+            <div>
+                <span class="badge">{{ doc.document_type }}</span>
+                <span class="badge" style="background: #f0fdf4; color: #16a34a;">{{ doc.jurisdiction }}</span>
+                {% if doc.authority_weight %}
+                <span class="muted" style="margin-left: 0.5rem;">Authority: {{ doc.authority_weight }}</span>
+                {% endif %}
+            </div>
+            <h3 style="margin: 0.5rem 0; font-size: 1rem;">
+                <a href="/document/{{ doc.id }}">{{ doc.citation or doc.title }}</a>
+            </h3>
+            {% if doc.date %}
+            <p class="muted">{{ doc.date }}</p>
+            {% endif %}
+            {% if doc.snippet %}
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">{{ doc.snippet[:300] }}{% if doc.snippet|length > 300 %}...{% endif %}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <!-- Pagination -->
+    {% if total > per_page %}
+    <div class="pagination">
+        {% set total_pages = (total // per_page) + (1 if total % per_page else 0) %}
+        {% if page > 1 %}
+        <a href="/search?q={{ query|urlencode }}&page={{ page - 1 }}{% if doc_type %}&type={{ doc_type|urlencode }}{% endif %}{% if jurisdiction %}&jurisdiction={{ jurisdiction|urlencode }}{% endif %}">Prev</a>
+        {% endif %}
+        {% for p in range(1, total_pages + 1) %}
+            {% if p == page %}
+            <span class="active">{{ p }}</span>
+            {% elif p <= 3 or p >= total_pages - 2 or (p >= page - 2 and p <= page + 2) %}
+            <a href="/search?q={{ query|urlencode }}&page={{ p }}{% if doc_type %}&type={{ doc_type|urlencode }}{% endif %}{% if jurisdiction %}&jurisdiction={{ jurisdiction|urlencode }}{% endif %}">{{ p }}</a>
+            {% elif p == 4 or p == total_pages - 3 %}
+            <span>...</span>
+            {% endif %}
+        {% endfor %}
+        {% if page < total_pages %}
+        <a href="/search?q={{ query|urlencode }}&page={{ page + 1 }}{% if doc_type %}&type={{ doc_type|urlencode }}{% endif %}{% if jurisdiction %}&jurisdiction={{ jurisdiction|urlencode }}{% endif %}">Next</a>
+        {% endif %}
+    </div>
+    {% endif %}
+    </div>
+</div>
+{% elif query %}
+<p>No results found for "{{ query }}".</p>
+{% endif %}
+{% endblock %}

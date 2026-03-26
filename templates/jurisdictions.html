@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Jurisdictions — PRDB{% endblock %}
+
+{% block content %}
+<h1>Jurisdictions</h1>
+<p class="muted">State-by-state guide to public records laws, exemptions, deadlines, and agencies.</p>
+
+<table>
+    <thead><tr><th>Jurisdiction</th><th>Documents</th></tr></thead>
+    <tbody>
+    {% for j in jurisdictions %}
+        <tr>
+            <td><a href="/jurisdiction/{{ j.code }}">{{ j.code }}</a></td>
+            <td>{{ "{:,}".format(j.count) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

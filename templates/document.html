@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}{{ doc.citation or doc.title }} — PRDB{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 1rem;">
+    <span class="badge">{{ doc.document_type }}</span>
+    <span class="badge" style="background: #f0fdf4; color: #16a34a;">{{ doc.jurisdiction }}</span>
+    {% if doc.authority_weight %}
+    <span class="badge" style="background: #fef3c7; color: #d97706;">Authority: {{ doc.authority_weight }}</span>
+    {% endif %}
+    {% if doc.precedent_strength %}
+    <span class="badge" style="background: #ede9fe; color: #7c3aed;">{{ doc.precedent_strength }}</span>
+    {% endif %}
+</div>
+
+<h1>{{ doc.citation or doc.title }}</h1>
+
+{% if doc.title and doc.citation %}
+<p style="font-size: 1.1rem; margin-bottom: 0.5rem;">{{ doc.title }}</p>
+{% endif %}
+
+<div class="muted" style="margin-bottom: 1.5rem;">
+    {% if doc.date %}Date: {{ doc.date }}{% endif %}
+    {% if doc.court %} | {{ doc.court }}{% endif %}
+    {% if doc.source %} | Source: {{ doc.source }}{% endif %}
+    {% if doc.source_url %} | <a href="{{ doc.source_url }}" target="_blank">Original</a>{% endif %}
+</div>
+
+{% if doc.summary_ai %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Summary</h2>
+    <p>{{ doc.summary_ai }}</p>
+</div>
+{% endif %}
+
+{% if doc.holdings %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Key Holdings</h2>
+    <ul>
+    {% for holding in doc.holdings|default('[]', true)|tojson|safe %}
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if doc.text %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Full Text</h2>
+    <div style="white-space: pre-wrap; font-family: 'Georgia', serif; font-size: 0.95rem; line-height: 1.7;">{{ doc.text }}</div>
+</div>
+{% endif %}
+
+{% if citing %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Cited By ({{ citing|length }})</h2>
+    <ul>
+    {% for c in citing %}
+        <li><a href="/document/{{ c.id }}">{{ c.citation or c.title }}</a> <span class="muted">({{ c.date }})</span></li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if cited %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Cites ({{ cited|length }})</h2>
+    <ul>
+    {% for c in cited %}
+        <li><a href="/document/{{ c.id }}">{{ c.citation or c.title }}</a> <span class="muted">({{ c.date }})</span></li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}

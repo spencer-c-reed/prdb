@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}{{ state }} — PRDB{% endblock %}
+
+{% block content %}
+<h1>{{ state }} Public Records Guide</h1>
+
+{% if doc_counts %}
+<h2>Document Coverage</h2>
+<table>
+    <thead><tr><th>Type</th><th>Count</th></tr></thead>
+    <tbody>
+    {% for type_name, count in doc_counts %}
+        <tr>
+            <td><a href="/search?q=Jurisdiction:%22{{ state }}%22+Type:%22{{ type_name|urlencode }}%22">{{ type_name }}</a></td>
+            <td>{{ count }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if rules %}
+<h2>Response Rules</h2>
+<table>
+    <thead><tr><th>Rule</th><th>Parameter</th><th>Value</th><th>Day Type</th><th>Citation</th></tr></thead>
+    <tbody>
+    {% for r in rules %}
+        <tr>
+            <td>{{ r.rule_type }}</td>
+            <td>{{ r.param_key }}</td>
+            <td>{{ r.param_value }}</td>
+            <td>{{ r.day_type or '' }}</td>
+            <td class="muted">{{ r.statute_citation or '' }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if exemptions %}
+<h2>Exemptions ({{ exemptions|length }})</h2>
+{% for e in exemptions %}
+<div class="card">
+    <div>
+        <span class="badge">{{ e.exemption_number or 'N/A' }}</span>
+        {% if e.short_name %}<strong>{{ e.short_name }}</strong>{% endif %}
+    </div>
+    <p class="muted" style="margin-top: 0.3rem;">{{ e.statute_citation }}</p>
+    {% if e.description %}<p style="margin-top: 0.5rem;">{{ e.description }}</p>{% endif %}
+    <a href="/exemption/{{ e.id }}" style="font-size: 0.85rem;">View details</a>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if agencies %}
+<h2>Agencies ({{ agencies|length }})</h2>
+<table>
+    <thead><tr><th>Agency</th><th>Level</th><th>Submission</th><th>Details</th></tr></thead>
+    <tbody>
+    {% for a in agencies %}
+        <tr>
+            <td>{{ a.name }}</td>
+            <td>{{ a.level }}</td>
+            <td>{{ a.submission_method or 'N/A' }}</td>
+            <td><a href="/agency/{{ a.id }}">View</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if templates %}
+<h2>Request Templates</h2>
+{% for t in templates %}
+<div class="card">
+    <strong>{{ t.template_name }}</strong>
+    {% if t.record_type %}<span class="muted"> — {{ t.record_type }}</span>{% endif %}
+    <pre style="margin-top: 0.5rem; white-space: pre-wrap; font-size: 0.85rem; background: var(--code-bg); padding: 1rem; border-radius: 4px;">{{ t.template_text }}</pre>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

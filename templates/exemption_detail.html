@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ exemption.short_name or exemption.statute_citation }} — PRDB{% endblock %}
+
+{% block content %}
+<div>
+    <span class="badge">{{ exemption.jurisdiction }}</span>
+    <span class="badge">{{ exemption.exemption_number or 'N/A' }}</span>
+    {% if exemption.category %}<span class="badge" style="background: #fef3c7; color: #d97706;">{{ exemption.category }}</span>{% endif %}
+</div>
+
+<h1 style="margin-top: 0.5rem;">{{ exemption.short_name or 'Exemption' }}</h1>
+<p class="muted" style="margin-bottom: 1rem;">{{ exemption.statute_citation }}</p>
+
+{% if exemption.description %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Description</h2>
+    <p>{{ exemption.description }}</p>
+</div>
+{% endif %}
+
+{% if exemption.scope %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Scope</h2>
+    <p>{{ exemption.scope }}</p>
+</div>
+{% endif %}
+
+{% if exemption.counter_arguments %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Challenge Strategies</h2>
+    <p>{{ exemption.counter_arguments }}</p>
+</div>
+{% endif %}
+
+{% if related_cases %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Related Case Law</h2>
+    <ul>
+    {% for c in related_cases %}
+        <li><a href="/document/{{ c.id }}">{{ c.citation or c.title }}</a> <span class="muted">({{ c.date }})</span></li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if related_opinions %}
+<div class="card">
+    <h2 style="font-size: 1rem;">Related AG Opinions</h2>
+    <ul>
+    {% for o in related_opinions %}
+        <li><a href="/document/{{ o.id }}">{{ o.citation or o.title }}</a> <span class="muted">({{ o.date }})</span></li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if exemption.last_verified %}
+<p class="muted" style="margin-top: 1rem;">Last verified: {{ exemption.last_verified }}</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}PRDB — Public Records Request Database{% endblock %}
+
+{% block content %}
+<h1>Public Records Request Database</h1>
+<p>A comprehensive database of FOIA and public records laws, exemptions, agency directories,
+   AG opinions, court decisions, and request tools across all US jurisdictions.</p>
+
+<form action="/search" method="get" class="search-box" style="max-width: 600px; margin: 2rem 0;">
+    <input type="text" name="q" placeholder="Search statutes, exemptions, case law..." autofocus>
+    <button type="submit">Search</button>
+</form>
+
+<div class="stat-grid">
+    <div class="stat-card">
+        <div class="number">{{ "{:,}".format(stats.total) }}</div>
+        <div class="label">Documents</div>
+    </div>
+    <div class="stat-card">
+        <div class="number">{{ stats.exemptions }}</div>
+        <div class="label">Exemptions</div>
+    </div>
+    <div class="stat-card">
+        <div class="number">{{ stats.agencies }}</div>
+        <div class="label">Agencies</div>
+    </div>
+    <div class="stat-card">
+        <div class="number">{{ stats.templates }}</div>
+        <div class="label">Templates</div>
+    </div>
+</div>
+
+{% if stats.by_type %}
+<h2>By Document Type</h2>
+<table>
+    <thead><tr><th>Type</th><th>Count</th></tr></thead>
+    <tbody>
+    {% for type_name, count in stats.by_type %}
+        <tr><td>{{ type_name }}</td><td>{{ "{:,}".format(count) }}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% if stats.by_jurisdiction %}
+<h2>By Jurisdiction</h2>
+<table>
+    <thead><tr><th>Jurisdiction</th><th>Count</th></tr></thead>
+    <tbody>
+    {% for jur, count in stats.by_jurisdiction %}
+        <tr>
+            <td><a href="/jurisdiction/{{ jur }}">{{ jur }}</a></td>
+            <td>{{ "{:,}".format(count) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
