@@ -134,22 +134,22 @@ class TestQueryEngine:
         docs = [
             {
                 'id': 'pytest-search-001',
-                'citation': '5 U.S.C. § 552',
-                'title': 'Freedom of Information Act',
+                'citation': 'PYTEST-001',
+                'title': 'Pytest Search Document One',
                 'document_type': 'Federal FOIA Statute',
                 'jurisdiction': 'federal',
                 'source': 'pytest',
-                'text': 'Each agency shall make available public records.',
+                'text': 'Pytest alpha bravo charlie xylophone unique search marker 001 zyzzyva.',
                 'date': '1966-07-04',
             },
             {
                 'id': 'pytest-search-002',
-                'citation': 'NY FOIL § 87',
-                'title': 'New York Freedom of Information Law',
+                'citation': 'PYTEST-002',
+                'title': 'Pytest Search Document Two',
                 'document_type': 'State Public Records Statute',
                 'jurisdiction': 'NY',
                 'source': 'pytest',
-                'text': 'Each agency shall make available for public inspection all records.',
+                'text': 'Pytest delta echo foxtrot zephyr unique search marker 002 ny xyzzy.',
                 'date': '1977-01-01',
             },
         ]
@@ -170,7 +170,7 @@ class TestQueryEngine:
         docs = self._setup_test_docs()
         try:
             from fetch_json import search
-            results = search('freedom of information', limit=10)
+            results = search('zyzzyva xylophone pytest alpha bravo', limit=10)
             assert len(results) >= 1
             assert any(r['id'] == 'pytest-search-001' for r in results)
         finally:

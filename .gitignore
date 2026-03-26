@@ -8,3 +8,5 @@ logs/
 cache/
 *.egg-info/
 .env
+web/node_modules/
+web/dist/
