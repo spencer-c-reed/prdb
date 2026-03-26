@@ -1,8 +1,8 @@
 # PRDB Tracker — Single Source of Truth
 
-## Project Status: Phase 4 Complete — All 50 States + DC + Federal
+## Project Status: Phase 7 Complete — Analytical Features Live
 
-**Last updated:** 2026-03-26 06:18 PM EDT
+**Last updated:** 2026-03-26 07:17 PM EDT
 
 **Placeholder name:** "prdb" — will be replaced with final project name.
 To rename: `grep -r "prdb\|PRDB" --include="*.py" --include="*.html" --include="*.json" --include="*.sql" --include="*.md" -l`
@@ -59,16 +59,56 @@ To rename: `grep -r "prdb\|PRDB" --include="*.py" --include="*.html" --include="
 - [x] NM, WV, HI, ID, NH
 - [x] RI, MT, DE, SD, ND, AK, WY, DC
 
-### Phase 5: Skill Integration [NOT STARTED]
-- [ ] Research skill (prdb-research)
-- [ ] Request skill (prdb-request)
-- [ ] Appeal skill (prdb-appeal)
+### Phase 5: Skill Integration [COMPLETE]
+- [x] Research skill (prdb-research)
+- [x] Request skill (prdb-request)
+- [x] Appeal skill (prdb-appeal)
 
-### Phase 6: Enrichment [NOT STARTED]
-- [ ] State agency directories
-- [ ] Scorecards
+### Phase 6: Web Interface [COMPLETE]
+- [x] React + Vite static site with HashRouter
+- [x] GitHub Pages deployment (spencer-c-reed.github.io/prdb/)
+- [x] MiniSearch client-side full-text search
+- [x] Jurisdiction detail pages, exemption catalog, agency directory, template library
+- [x] Side-by-side jurisdiction comparison tool
+
+### Phase 7: Analytical Features [COMPLETE]
+- [x] Transparency scorecards (A+ through F grading, 9 scoring factors)
+- [x] Deadline rankings (sorted by calendar-equivalent response time)
+- [x] Fee comparison (per-page copy fee table with distribution chart)
+- [x] Penalty comparison (attorney fees, civil/criminal penalties, per diem)
+- [x] Exemption category crosswalk (24 categories across jurisdictions)
+- [x] Appeal pathway summaries (admin vs judicial step flows)
+- [x] Model provision flags (best-in-class features highlighted)
+
+### Phase 8: Gap Filling [IN PROGRESS]
+
+#### 8A: State Agency Directories [IN PROGRESS]
+- [ ] All 51 non-federal jurisdictions have 0 agencies (federal has 413)
+- [ ] Target: ~15-25 key agencies per state (governor, AG, state police, DOT, health, education, corrections, environment, etc.)
+- [ ] Include: name, abbreviation, portal_url, email, submission_method
+
+#### 8B: Appeal Templates [NOT STARTED]
+- [ ] Only 11 of 52 jurisdictions have appeal templates (CA, DC, FL, MA, ME, MI, MN, NY, TX, VT, federal)
+- [ ] Remaining 41 states need appeal letter templates
+
+#### 8C: Template Expansion [NOT STARTED]
+- [ ] NE has only 1 template; AZ, MA, ME, MI, MO, VT, WA have only 2
+- [ ] Most states have only 3 templates (general + law enforcement + contracts)
+- [ ] Missing types: body camera, education, personnel, electronic records, financial
+
+#### 8D: State Statutes as Documents [NOT STARTED]
+- [ ] 48 jurisdictions have 0 source documents (only federal=105, CA=7, NY=7, TX=1)
+- [ ] Need: statute text for each state's public records law
+
+#### 8E: State Case Law / AG Opinions [NOT STARTED]
+- [ ] 0 state-level case law documents
+- [ ] 0 state AG advisory opinions
+- [ ] Many states publish FOIA guidance/advisory opinions
+
+### Phase 9: Future Enrichment [NOT STARTED]
 - [ ] Open meetings coverage
 - [ ] Municipal coverage
+- [ ] Scorecards with weighted user-configurable factors
 
 ## Infrastructure
 
@@ -77,6 +117,8 @@ To rename: `grep -r "prdb\|PRDB" --include="*.py" --include="*.html" --include="
 | Database | db/prdb.db (120 docs, schema v1) |
 | Flask app | app.py (port 8402) |
 | Query engine | fetch_json.py |
+| Web (static) | React + Vite → GitHub Pages |
+| Live URL | https://spencer-c-reed.github.io/prdb/ |
 | Cron | Not configured yet |
 | Nginx | Not configured yet |
 | Systemd | Not configured yet |
