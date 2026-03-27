@@ -376,16 +376,23 @@ export default function JurisdictionDetailPage() {
           </h2>
           <div className="bg-white border border-gray-200 rounded-lg divide-y divide-gray-100">
             {documents.slice(0, 20).map(d => (
-              <div key={d.id} className="px-4 py-3 hover:bg-gray-50">
+              <Link key={d.id} to={`/documents/${d.id}`} className="block px-4 py-3 hover:bg-gray-50">
                 <div className="flex items-start gap-3">
-                  <Badge variant="gray">{d.document_type}</Badge>
+                  <Badge variant={
+                    d.document_type?.includes('Statute') ? 'green'
+                    : d.document_type?.includes('Opinion') ? 'purple'
+                    : d.document_type?.includes('AG') || d.document_type?.includes('Administrative') ? 'amber'
+                    : 'gray'
+                  }>{d.document_type}</Badge>
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium text-gray-900 truncate">{d.title}</div>
                     {d.citation && <div className="text-xs text-gray-400 mt-0.5">{d.citation}</div>}
+                    {d.court && <div className="text-xs text-gray-400">{d.court}</div>}
                     {d.date && <div className="text-xs text-gray-400">{d.date}</div>}
+                    {d.summary && <div className="text-xs text-gray-500 mt-1 line-clamp-2">{d.summary}</div>}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
             {documents.length > 20 && (
               <div className="px-4 py-3 text-sm text-gray-400">

@@ -83,6 +83,7 @@ export default function Layout() {
               <NavItem to="/exemptions">Exemptions</NavItem>
               <NavItem to="/agencies">Agencies</NavItem>
               <NavItem to="/templates">Templates</NavItem>
+              <NavItem to="/documents">Documents</NavItem>
               <NavItem to="/compare">Compare</NavItem>
               <AnalysisDropdown />
             </div>

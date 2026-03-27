@@ -14,6 +14,8 @@ import TemplateDetailPage from './pages/TemplateDetailPage'
 import ComparePage from './pages/ComparePage'
 import SearchPage from './pages/SearchPage'
 import AboutPage from './pages/AboutPage'
+import DocumentsPage from './pages/DocumentsPage'
+import DocumentDetailPage from './pages/DocumentDetailPage'
 import ScorecardsPage from './pages/ScorecardsPage'
 import DeadlinesPage from './pages/DeadlinesPage'
 import FeesPage from './pages/FeesPage'
@@ -36,6 +38,8 @@ export default function App() {
             <Route path="agencies/:id" element={<AgencyDetailPage />} />
             <Route path="templates" element={<TemplatesPage />} />
             <Route path="templates/:id" element={<TemplateDetailPage />} />
+            <Route path="documents" element={<DocumentsPage />} />
+            <Route path="documents/:id" element={<DocumentDetailPage />} />
             <Route path="compare" element={<ComparePage />} />
             <Route path="scorecards" element={<ScorecardsPage />} />
             <Route path="deadlines" element={<DeadlinesPage />} />
