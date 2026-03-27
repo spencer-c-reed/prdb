@@ -2,7 +2,7 @@
 
 ## Project Status: Phase 7 Complete — Analytical Features Live
 
-**Last updated:** 2026-03-26 07:17 PM EDT
+**Last updated:** 2026-03-26 08:27 PM EDT
 
 **Placeholder name:** "prdb" — will be replaced with final project name.
 To rename: `grep -r "prdb\|PRDB" --include="*.py" --include="*.html" --include="*.json" --include="*.sql" --include="*.md" -l`
@@ -11,11 +11,11 @@ To rename: `grep -r "prdb\|PRDB" --include="*.py" --include="*.html" --include="
 
 | Metric | Count |
 |--------|-------|
-| Documents | 120 |
+| Documents | 252 (55 statutes + 76 federal circuit opinions + 57 state court opinions + 26 agency guidance + 27 AG/admin opinions + 11 other) |
 | Exemptions | 569 |
-| Agencies | 413 |
+| Agencies | 1,218 (413 federal + 805 state) |
 | Response Rules | 717 |
-| Templates | 159 |
+| Templates | 235 (52 appeal + 53 general + 49 law enforcement + 45 contracts + 36 other) |
 | Jurisdictions | 52 (50 states + DC + federal) |
 | FTS5 indexed | 120 |
 | Tests | 23/23 passing |
@@ -82,28 +82,28 @@ To rename: `grep -r "prdb\|PRDB" --include="*.py" --include="*.html" --include="
 
 ### Phase 8: Gap Filling [IN PROGRESS]
 
-#### 8A: State Agency Directories [IN PROGRESS]
-- [ ] All 51 non-federal jurisdictions have 0 agencies (federal has 413)
-- [ ] Target: ~15-25 key agencies per state (governor, AG, state police, DOT, health, education, corrections, environment, etc.)
-- [ ] Include: name, abbreviation, portal_url, email, submission_method
+#### 8A: State Agency Directories [COMPLETE]
+- [x] 805 state-level agencies across all 51 non-federal jurisdictions (~15-20 per state)
+- [x] Includes: governor, AG, state police, DOT, health, education, corrections, environment, labor, etc.
 
-#### 8B: Appeal Templates [NOT STARTED]
-- [ ] Only 11 of 52 jurisdictions have appeal templates (CA, DC, FL, MA, ME, MI, MN, NY, TX, VT, federal)
-- [ ] Remaining 41 states need appeal letter templates
+#### 8B: Appeal Templates [COMPLETE]
+- [x] All 52 jurisdictions have appeal templates
+- [x] Direct-to-court states: pre-litigation demand letters
+- [x] Admin appeal states: complaints to FOIC, PAC, GRC, OOR, IPIB, etc.
 
-#### 8C: Template Expansion [NOT STARTED]
-- [ ] NE has only 1 template; AZ, MA, ME, MI, MO, VT, WA have only 2
-- [ ] Most states have only 3 templates (general + law enforcement + contracts)
-- [ ] Missing types: body camera, education, personnel, electronic records, financial
+#### 8C: Template Expansion [COMPLETE]
+- [x] Law enforcement templates added for 6 missing states
+- [x] Government contracts templates added for 29 missing states
+- [x] Every state now has at least 4 templates (general + law enforcement + contracts + appeal)
 
-#### 8D: State Statutes as Documents [NOT STARTED]
-- [ ] 48 jurisdictions have 0 source documents (only federal=105, CA=7, NY=7, TX=1)
-- [ ] Need: statute text for each state's public records law
+#### 8D: State Statutes as Documents [COMPLETE]
+- [x] All 52 jurisdictions have statute documents (48 new + 4 existing)
+- [x] Each covers definitions, scope, response timeline, fees, exemptions, enforcement
 
-#### 8E: State Case Law / AG Opinions [NOT STARTED]
-- [ ] 0 state-level case law documents
-- [ ] 0 state AG advisory opinions
-- [ ] Many states publish FOIA guidance/advisory opinions
+#### 8E: State Case Law / AG Opinions [COMPLETE]
+- [x] 57 landmark state court opinions across 27 states (2-3 per state)
+- [x] 27 AG/administrative body opinions across 9 states (KY, TX, IA, IL, PA, VA, CT, NJ, OR)
+- [x] Covers: presumption of openness, segregability, law enforcement, deliberative process, e-records, fees
 
 ### Phase 9: Future Enrichment [NOT STARTED]
 - [ ] Open meetings coverage
